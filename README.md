@@ -254,9 +254,25 @@ pip install -e ".[dev]"
 
 ### Running Tests
 
+The test file requires additional dependencies that are not part of the main package:
+
 ```bash
-pytest
+# Install test dependencies
+pip install -r requirements-test.txt
+
+# Run the test file (requires Azure SQL connection and OpenAI API setup)
+python tests/test_azure_sql_checkpoint.py
 ```
+
+**Note**: The test file requires:
+- `python-dotenv` for environment variable management
+- `langchain-openai` for the Azure OpenAI integration example
+- Proper environment variables set in a `.env` file:
+  - `AZURE_SQL_CONN` - Azure SQL connection string
+  - `AZURE_DEPLOYMENT_NAME` - Azure OpenAI deployment name
+  - `AZURE_OPENAI_VERSION` - Azure OpenAI API version
+  - `AZURE_OPENAI_ENDPOINT` - Azure OpenAI endpoint URL
+  - `AZURE_OPENAI_API_KEY` - Azure OpenAI API key
 
 ## License
 

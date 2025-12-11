@@ -1,9 +1,49 @@
-import os
+"""
+Test file for langgraph-azure-sql-db-checkpoint.
+
+This test file demonstrates both synchronous and asynchronous usage of
+AzureSQLCheckpointSaver with LangGraph and Azure OpenAI.
+
+Dependencies:
+- python-dotenv: For loading environment variables from .env file
+- langchain-openai: For Azure OpenAI integration in the test example
+
+Install test dependencies with:
+    pip install -r requirements-test.txt
+
+Environment variables required:
+- AZURE_SQL_CONN: Azure SQL Database connection string
+- AZURE_DEPLOYMENT_NAME: Azure OpenAI deployment name
+- AZURE_OPENAI_VERSION: Azure OpenAI API version
+- AZURE_OPENAI_ENDPOINT: Azure OpenAI endpoint URL
+- AZURE_OPENAI_API_KEY: Azure OpenAI API key
+"""
+
 import asyncio
-from dotenv import load_dotenv
-from langchain_openai import AzureChatOpenAI
+import os
+import sys
+
+# Check for optional test dependencies
+try:
+    from dotenv import load_dotenv
+except ImportError:
+    print("Error: python-dotenv is not installed.")
+    print("Install it with: pip install python-dotenv")
+    sys.exit(1)
+
+try:
+    from langchain_openai import AzureChatOpenAI
+except ImportError:
+    print("Error: langchain-openai is not installed.")
+    print("Install it with: pip install langchain-openai")
+    sys.exit(1)
+
 from langgraph.graph import START, MessagesState, StateGraph
-from langgraph_azure_sql_db_checkpoint import AzureSQLCheckpointSaver, AsyncAzureSQLCheckpointSaver
+
+from langgraph_azure_sql_db_checkpoint import (
+    AsyncAzureSQLCheckpointSaver,
+    AzureSQLCheckpointSaver,
+)
 
 load_dotenv()
 model = AzureChatOpenAI(
@@ -19,7 +59,9 @@ model = AzureChatOpenAI(
 
 # Initialize AzureSQLCheckpointSaver with connection string from environment
 memory = AzureSQLCheckpointSaver(connection_string=os.getenv("AZURE_SQL_CONN"))
-async_memory = AsyncAzureSQLCheckpointSaver(connection_string=os.getenv("AZURE_SQL_CONN"))
+async_memory = AsyncAzureSQLCheckpointSaver(
+    connection_string=os.getenv("AZURE_SQL_CONN")
+)
 
 def call_model(state: MessagesState):
     response = model.invoke(state["messages"])

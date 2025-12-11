@@ -1,0 +1,5 @@
+# Test dependencies for langgraph-azure-sql-db-checkpoint
+# These are optional dependencies needed to run the test file
+
+python-dotenv>=1.0.0
+langchain-openai>=0.1.0

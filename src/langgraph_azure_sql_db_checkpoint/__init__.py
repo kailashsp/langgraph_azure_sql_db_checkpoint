@@ -35,7 +35,7 @@ Example:
 
 from .azure_sql_checkpoint import AsyncAzureSQLCheckpointSaver, AzureSQLCheckpointSaver
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __author__ = "Kailash S Prem"
 __email__ = "premkailash060@gmail.com"
 
