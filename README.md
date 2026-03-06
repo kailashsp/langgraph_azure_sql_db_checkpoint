@@ -282,6 +282,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 - [LangGraph](https://github.com/langchain-ai/langgraph) - The graph-based conversation framework
 - [SQLAlchemy](https://www.sqlalchemy.org/) - Python SQL toolkit and ORM
+- [Dynamo db checkpoint](https://github.com/skamalj/langgraph_dynamodb_checkpoint) - Used much of this linked repo as reference to built this
 
 ## Support
 
